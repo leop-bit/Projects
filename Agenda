@@ -1,0 +1,105 @@
+# Agenda
+
+
+def cadastrar_contatos(Contatos, nome_contatos, numero_telefonico, email_contato):
+    contato = {"Nome": nome_contatos,"Telefone": numero_telefonico , "Email": email_contato ,"Favoritos": False}
+    Contatos.append(contato)
+    print(f"Contato: {nome_contatos} de telefone: {numero_telefonico} e email: {email_contato} adicionado com sucesso!")
+    return
+
+def visualizar_contatos(Contatos):
+    print("\n Catálogo de contatos:")
+    for indice, contato in enumerate(Contatos, start=1):
+        status = "✦" if contato["Favoritos"] else " "
+        catalogo_contatos = contato["Nome"]
+        numero = contato["Telefone"]
+        email = contato["Email"]
+        print(f"{indice}. [{status}] {catalogo_contatos} com o número: {numero} e email: {email} ")
+    
+    
+def editar_contato(Contatos, numero_contato, nome_ajustado, telefone_ajustado, email_ajustado):
+    numero_contato_ajustado = int(numero_contato) - 1
+    if numero_contato_ajustado >= 0 and numero_contato_ajustado < len(Contatos):
+        Contatos[numero_contato_ajustado]["Nome"] = nome_ajustado
+        Contatos[numero_contato_ajustado]["Telefone"] = telefone_ajustado
+        Contatos[numero_contato_ajustado]["Email"] = email_ajustado
+        print(f"\nCatálogo atualizado nome: {nome_ajustado}, telefone {telefone_ajustado} e email correto: {email_ajustado}")
+    else:
+            print("índice inexistente")
+    return
+
+def definir_favoritos(Contatos, numero_contato):
+    numero_contato_ajustado = int(numero_contato) - 1
+    Contatos[numero_contato_ajustado]["Favoritos"] = True
+    print(f"Contato {numero_contato_ajustado} marcado como favorito!")
+    return
+
+def contatos_favoritos(Contatos):
+    print("\n Catálogo de Favoritos:")
+    for indice, contato in enumerate(Contatos, start=1):
+            if contato["Favoritos"]:
+                catalogo_contatos = contato["Nome"]
+                print(f"Contato: {indice}. {catalogo_contatos} favorito!")
+
+
+def deletar_contatos(Contatos, indice_contato):
+      indice_contato_adj = int(indice_contato) - 1
+      if 0 <= indice_contato_adj < len(Contatos):
+        contato_removido = Contatos.pop(indice_contato_adj)
+        print(f"{contato_removido['Nome']}, com sucesso")
+
+    
+
+
+Contatos = []
+
+
+
+
+
+
+while True:
+
+    print("1. Cadastrar novos contatos: ")
+    print("2. Visualizar contatos cadastrados: ")
+    print("3. Editar contato: ")
+    print("4. Marcar ou desmarcar favorito: ")
+    print("5. Visualizar contatos favoritos: ")
+    print("6. Apagar contato")
+    print("7. Sair")
+    
+    escolha = input("Digite a operação que deseja realizar: ")
+
+    if escolha == "1":
+        nome_contatos = input("Digite o nome do contato que deseja adicionar: ")
+        numero_telefonico = input("Digite o número do contato: ")
+        email_contato = input("Digite o email para prosseguir: ")
+        cadastrar_contatos(Contatos,nome_contatos, numero_telefonico, email_contato)
+
+    elif escolha == "2":
+        visualizar_contatos(Contatos)
+    
+    elif escolha =="3":
+        visualizar_contatos(Contatos)
+        numero_contato = input("Digite o contato que deseje alterar: ")
+        nome_ajustado = input("Digite o nome se necessita ajustá-lo: ")
+        telefone_ajustado = input("Digite o Telefone ajustado: ")
+        email_ajustado = input("Digite o email que deseja ajustar: ")
+        editar_contato(Contatos,numero_contato,nome_ajustado, telefone_ajustado, email_ajustado)
+
+    elif escolha =="4":
+        visualizar_contatos(Contatos)
+        numero_contato = input("Selecione o contato que deseja marcar como favorito: ")
+        definir_favoritos(Contatos, numero_contato)
+
+    elif escolha =="5":
+        contatos_favoritos(Contatos)
+
+    elif escolha =="6":
+        deletar_contatos(Contatos, indice_contato)
+        indice_contato = input("Qual contato deseja excluir? ")
+
+    elif escolha == "7":
+        break
+
+print("Programa finalizado com sucesso!")
